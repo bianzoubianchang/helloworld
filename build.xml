@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<project name="testant" default="run" basedir="." >
+	<property name="src" value="src" />
+	<property name="dest" value="classes" />
+	<property name="hello_jar" value="hello.jar" />
+	
+	<target name="del">
+		<delete dir="${dest}" />
+	</target>
+	
+	<target name="init">
+		<mkdir dir="${dest}" />
+	</target>
+	
+	<target name="compile" depends="init">
+		<echo message="开始编译" />
+		<echo message="........" />
+		<echo message="........" />
+		<javac srcdir="${src}" destdir="${dest}" />
+		<echo message="编译完成" />		
+	</target>
+	
+	<target name="jar" depends="compile">
+		<jar jarfile="${hello_jar}" basedir="${dest}" />
+	</target>
+	
+	<target name="run" depends="jar">
+				<java classname="anttest.helloworld" classpath="${hello_jar}" />
+	</target>
+	
+	<target name="clean" >
+		<delete dir="${dest}" />
+		<delete file="${hello_jar}" />
+	</target>
+
+</project>
